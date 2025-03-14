@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 
 // TODO: Implement a component that:
 // 1. Has a state to track a list of items
@@ -7,11 +7,31 @@ import React from 'react';
 // 4. Displays the list of items
 
 const ItemList = () => {
-  // Your implementation here
-  
+  const [items, setItems] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleAddItem = () => {
+    if (inputValue.trim() !== "") {
+      setItems([...items, inputValue]);
+      setInputValue("");
+    }
+  };
+
   return (
     <div>
-      {/* Your JSX here */}
+      <h2>Item List</h2>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Enter item"
+      />
+      <button onClick={handleAddItem}>Add Item</button>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 };
